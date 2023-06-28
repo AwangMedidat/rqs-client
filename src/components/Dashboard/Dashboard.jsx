@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Dashboard.css";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
+  const goLogin = (e) => {
+    e.preventDefault();
+    navigate("/login");
+    localStorage.clear();
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("user")), "<<<< data user");
+  }, []);
+
   return (
     <div>
       <div id="wrapper">
         <ul
-          className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+          className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"
           id="accordionSidebar"
         >
           <a
@@ -17,7 +31,7 @@ function Dashboard() {
               <i className="fas fa-laugh-wink"></i>
             </div>
             <div className="sidebar-brand-text mx-3">
-              SB Admin <sup>2</sup>
+              RQS <sup>2</sup>
             </div>
           </a>
 
@@ -954,9 +968,9 @@ function Dashboard() {
               >
                 Cancel
               </button>
-              <a className="btn btn-primary" href="login.html">
+              <button className="btn btn-primary" onClick={goLogin}>
                 Logout
-              </a>
+              </button>
             </div>
           </div>
         </div>
